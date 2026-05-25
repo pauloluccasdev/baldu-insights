@@ -118,19 +118,6 @@ npm run dev
 
 Acesse: **http://localhost:3002**
 
-## Credenciais de acesso (seed)
-
-| Campo | Valor |
-|-------|-------|
-| E-mail | `admin@baldu.com` |
-| Senha | `baldu123` |
-
-Após o login, selecione um dos três perfis disponíveis:
-
-- **Paulo Ribeiro** — dono da assessoria, visão completa (47 atletas, 4 pastas)
-- **Gabriel Carvalho** — treinador de corrida (14 atletas)
-- **Marcelle Silva** — treinadora de triathlon (9 atletas)
-
 ## Endpoints da API
 
 ```
