@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+
+  @@map("accounts")
+}
+
+// One profile per coach. The "owner" profile can view all folders.
+model Profile {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  shortName   String
+  initials    String
+  role        String
+  avatarClass String?
+  isOwner     Boolean  @default(false)
+  scope       String
+  scopeAll    Boolean  @default(false)
+  recents     String[]
+  statsData   Json     // { atletas, coments, inativos, provas, provasSub, quickSub, responseTexts }
+  chartData   Json     // { title, sub, total, bars }
+  athleteViews Json    // { atencao, comentarios, 'sem-treino', provas } each is AthleteCard[]
+  comments    Json     // CommentItem[]
+  races       Json     // RaceItem[]
+  folders     Folder[]
+
+  @@map("profiles")
+}
+
+model Folder {
+  id        String  @id @default(cuid())
+  name      String
+  tone      String
+  count     Int
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id])
+
+  @@map("folders")
+}
